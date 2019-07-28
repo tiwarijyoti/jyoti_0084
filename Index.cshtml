@@ -1,0 +1,64 @@
+﻿@model Dynmmic_checkbox_value.Models.CollectionVM
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+   @using (Html.BeginForm())
+   {
+    <div>
+            @{int i = 0;
+                foreach (var choice in Model.RiskCategoryQuestion)
+                {
+                    <div class="form-group">
+                        @Html.HiddenFor(m => m.RiskCategoryQuestion[i].RiskCategoryId)
+                        @Html.LabelFor(m => m.RiskCategoryQuestion[i].Question)
+                        @Html.HiddenFor(m => m.RiskCategoryQuestion[i].Question)
+                        @Html.HiddenFor(m => m.RiskCategoryQuestion[i].FiledType)
+                        @if (choice.FiledType == 1)
+                        {                        
+                        @Html.TextBoxFor(m => m.RiskCategoryQuestion[i].FiledType)                            
+                        }
+                        @{int j = 0;
+                            foreach (var option in Model.RiskCategoryOption)
+                            {
+                                if (choice.FiledType == 2)
+                                {
+
+                                    if (option.RiskCategoryId == choice.RiskCategoryId)
+                                    { 
+                        @Html.HiddenFor(m => m.RiskCategoryOption[j].OptionId)
+                        @Html.HiddenFor(m => m.RiskCategoryOption[j].RiskCategoryId)
+                        @Html.RadioButtonFor(m => m.RiskCategoryOption[j].SelectedPaymentType, option.OptionId, new{ id = Model.RiskCategoryOption[i].OptionId, Name="schs", @checked = true }) @option.Text
+                        @Html.HiddenFor(m => m.RiskCategoryOption[j].isAvalable)
+                                    }
+                                    //j++;
+                                }
+                                else if(choice.FiledType == 3)
+                                {
+                                    if (option.RiskCategoryId == choice.RiskCategoryId)
+                                    {
+                        @Html.HiddenFor(m => m.RiskCategoryOption[j].OptionId)
+                        @Html.HiddenFor(m => m.RiskCategoryOption[j].RiskCategoryId)
+                        @Html.CheckBoxFor(m => m.RiskCategoryOption[j].isAvalable, new { id = Model.RiskCategoryOption[i].OptionId })
+                        @Html.DisplayFor(m => m.RiskCategoryOption[j].Text)
+                        @Html.HiddenFor(m => m.RiskCategoryOption[j].Text)
+                                    }
+                                    // j++;
+                                }
+                                j++;
+                            }
+
+                            }
+                    </div>
+                                i++;
+                                j++;
+                            }
+                            }
+            
+        <input type="submit" value="Submit" name="submitBtn" id="submitBtn" />
+    </div>
+   }
+
+</div>
+
