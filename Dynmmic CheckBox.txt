@@ -1,0 +1,34 @@
+https://stackoverflow.com/questions/38119751/how-to-get-all-selected-checkboxes-in-razor
+https://dotprogramming.blogspot.com/2014/04/how-to-create-checkboxlist-in-aspnet-mvc.html
+https://www.c-sharpcorner.com/forums/how-to-get-a-checkbox-value-in-mvc-4-and-save-to-database
+https://www.c-sharpcorner.com/UploadFile/sourabh_mishra1/checkboxlist-in-Asp-Net-mvc/
+
+https://www.google.com/search?ei=rT09XeDvFrnVz7sP-K6PkAc&q=how+to+get+and+set+dynamic+generated+checkbox+mvc+4+from+database&oq=how+to+get+and+set+dynamic+generated+checkbox+mvc+4+from+database&gs_l=psy-ab.3..35i39.9384.18395..19113...9.0..0.764.3880.0j2j5j1j0j2j1......0....1..gws-wiz.......0i71j33i10j35i304i39.XFs2k0VnkoA&ved=0ahUKEwig-vqy-9bjAhW56nMBHXjXA3IQ4dUDCAo&uact=5#kpvalbx=_wj09XeaSGdrXz7sPi929wAs9
+https://stackoverflow.com/questions/11848762/dynamic-radiobutton-in-razor
+
+FieldType = 2,
+
+
+@*@{int i = 0;
+                foreach (var choice in Model.ChoicesVM)
+                {
+                    if (choice.FieldType == 2)
+                    {
+                        @Html.HiddenFor(m => m.ChoicesVM[i].SNo)
+                        @Html.RadioButtonFor(model => model.ChoicesVM[i].Text, choice.Text) @choice.Text
+                        @Html.HiddenFor(m => m.ChoicesVM[i].Text)
+                    }
+                    else
+                    {
+                        @Html.HiddenFor(m => m.ChoicesVM[i].SNo)
+                        @Html.CheckBoxFor(m => m.ChoicesVM[i].isAvalable, new { id = Model.ChoicesVM[i].SNo, @class = "divider" })
+                        @Html.DisplayFor(m => m.ChoicesVM[i].Text)
+                        @Html.HiddenFor(m => m.ChoicesVM[i].Text)
+                        }
+                        i++;
+                    }
+                }*@
+
+j9173808284
+
+
