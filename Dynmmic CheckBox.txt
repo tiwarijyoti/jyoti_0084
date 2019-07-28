@@ -31,4 +31,6 @@ FieldType = 2,
 
 j9173808284
 
+https://dotprogramming.blogspot.com/2014/04/how-to-create-checkboxlist-in-aspnet-mvc.html
+
 
