@@ -1,0 +1,81 @@
+using Duplicate_Data_reduce.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+
+namespace Duplicate_Data_reduce.Controllers
+{
+    public class HomeController : Controller
+    {
+        public ActionResult Index()
+        {
+            List<Student> studentList = new List<Student>() {
+                new Student(){ StudentID=1, StudentName="Bill"},
+                new Student(){ StudentID=2, StudentName="Steve"},
+                new Student(){ StudentID=3, StudentName="Ram"},
+                new Student(){ StudentID=1, StudentName="Moin"}
+            };
+
+            List<Student> TempList = new List<Student>();
+
+            string name;
+            foreach (Student u1 in studentList)
+            {
+                bool duplicatefound = false;
+                foreach (Student u2 in TempList)
+                {
+                    if (u1.StudentID == u2.StudentID)
+                    {
+                        duplicatefound = true;
+
+                        name = u2.StudentName + u1.StudentName;
+                    }
+                   }
+                //u1.StudentName= name;
+
+                if (!duplicatefound)
+                    TempList.Add(u1);
+            }
+           // return TempList;
+        //}
+            return View();
+        }
+
+        public ActionResult About()
+        {
+            ViewBag.Message = "Your application description page.";
+
+            return View();
+        }
+
+        public ActionResult Contact()
+        {
+            ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
+    }
+}
+
+=====================
+Queries
+===================
+
+select * from Property
+
+select Distinct TQ.Question,TQ.ID,TQ.FieldType,TRCO.OptionText,TRCE.Answer,P.PropertyName
+from tblQuestion TQ
+inner join tblRiskCategoryOtion TRCO on TRCO.RiskCategoryId=TQ.ID
+inner join tblRiskCategoryEvalution TRCE on TRCE.RiskCategoryQuestionId=TQ.ID  
+inner join Property P on P.Id=TRCE.propertyId
+inner join tblRiskCategoryEvalutionOption TRCEO on TRCEO.RiskCategoryEvalutionId=TRCE.ID
+and TRCEO.RiskCategoryOptionId=TRCO.ID 
+where TRCE.RiskCategoryQuestionId=TQ.ID 
+Union  
+select Distinct TQ.Question,TQ.ID,TQ.FieldType,TRCE.Answer as OptionText,TRCE.Answer,P.PropertyName
+from tblQuestion TQ
+inner join tblRiskCategoryEvalution TRCE on TRCE.RiskCategoryQuestionId=TQ.ID 
+and TQ.FieldType=1
+inner join Property P on P.Id=TRCE.propertyId
