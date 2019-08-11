@@ -1,0 +1,61 @@
+We take Question and Answers
+
+===================================
+select * from tblQuestion
+select * from tblRiskCategoryOtion
+select * from tblRiskCategoryEvalution
+select * from tblRiskCategoryEvalutionOption
+
+SELECT Distinct TQ.Question,TQ.ID,TQ.FieldType,
+STUFF((SELECT ', ' + TRCO.OptionText FROM tblRiskCategoryOtion TRCO  
+INNER JOIN tblRiskCategoryEvalution TRCE on TRCE.RiskCategoryQuestionId=TQ.ID   
+INNER JOIN tblRiskCategoryEvalutionOption TRCEO on TRCEO.RiskCategoryEvalutionId=TRCE.ID
+AND TRCEO.RiskCategoryOptionId=TRCO.ID 
+WHERE TRCE.RiskCategoryQuestionId=TQ.ID FOR XML PATH('')), 1, 1, '') as optionText
+from tblQuestion TQ
+INNER JOIN tblRiskCategoryOtion TRCO on TRCO.RiskCategoryId=TQ.ID 
+INNER JOIN tblRiskCategoryEvalution TRCE on TRCE.RiskCategoryQuestionId=TQ.ID  
+INNER JOIN Property P on P.Id=TRCE.propertyId
+INNER JOIN tblRiskCategoryEvalutionOption TRCEO on TRCEO.RiskCategoryEvalutionId=TRCE.ID
+AND TRCEO.RiskCategoryOptionId=TRCO.ID 
+where TRCE.propertyId='2' and TRCE.RiskCategoryQuestionId=TQ.ID
+Union ALL 
+SELECT Distinct TQ.Question,TQ.ID,TQ.FieldType,TRCE.Answer as OptionText
+from tblQuestion TQ
+INNER JOIN tblRiskCategoryEvalution TRCE on TRCE.RiskCategoryQuestionId=TQ.ID 
+INNER JOIN Property P on P.Id=TRCE.propertyId
+where TRCE.Answer IS NOT NULL and TRCE.propertyId='2' and TRCE.RiskCategoryQuestionId=TQ.ID
+
+========================================================================================
+
+Q2=QuestionId Wise
+
+SELECT Distinct TQ.Question,TQ.ID,TQ.FieldType,
+STUFF((SELECT ', ' + TRCO.OptionText FROM tblRiskCategoryOtion TRCO  
+INNER JOIN tblRiskCategoryEvalution TRCE on TRCE.RiskCategoryQuestionId=TQ.ID   
+INNER JOIN tblRiskCategoryEvalutionOption TRCEO on TRCEO.RiskCategoryEvalutionId=TRCE.ID
+AND TRCEO.RiskCategoryOptionId=TRCO.ID 
+WHERE TRCE.RiskCategoryQuestionId=TQ.ID FOR XML PATH('')), 1, 1, '') as optionText
+from tblQuestion TQ
+INNER JOIN tblRiskCategoryOtion TRCO on TRCO.RiskCategoryId=TQ.ID 
+INNER JOIN tblRiskCategoryEvalution TRCE on TRCE.RiskCategoryQuestionId=TQ.ID  
+INNER JOIN tblRiskCategoryEvalutionOption TRCEO on TRCEO.RiskCategoryEvalutionId=TRCE.ID
+AND TRCEO.RiskCategoryOptionId=TRCO.ID 
+where TRCE.propertyId='1' and TRCE.RiskCategoryQuestionId='2'
+Union ALL 
+SELECT Distinct TQ.Question,TQ.ID,TQ.FieldType,TRCE.Answer as OptionText
+from tblQuestion TQ
+INNER JOIN tblRiskCategoryEvalution TRCE on TRCE.RiskCategoryQuestionId=TQ.ID 
+where TRCE.Answer IS NOT NULL and TRCE.propertyId='1' and TRCE.RiskCategoryQuestionId='2'
+
+
+=============================
+MCQ Designs
+=============================
+https://www.onlineinterviewquestions.com/bootstrap-mcq/
+https://www.proprofs.com/quiz-school/story.php?title=bootstrap-4-quick-start-quizvx
+https://bootsnipp.com/snippets/VR1zB
+https://www.proprofs.com/quiz-school/story.php?title=bootstrap-4-quick-start-quizvx
+
+
+
